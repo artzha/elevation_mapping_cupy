@@ -1,3 +1,16 @@
+# AMRL Modifications
+
+## Setting up the environment
+Before executing this command, setup your current terminal with the ROS network as the docker container assumes the sam e
+1. Clone this repository and cd into it.
+2. (local) `docker build -t artzha/elevation_mapping_cupy -f Dockerfile .`
+3. (local) `xhost +local:` This exposes the host display. Check by doing `echo $DISPLAY`
+4. (local) `docker run --rm -it --gpus all -e DISPLAY=$DISPLAY --net=host -v ./:/home/catkin_ws/src/elevation_mapping_cupy artzha/elevation_mapping_cupy /bin/bash`
+5. (container) `cd /home/catkin_ws/src/elevation_mapping_cupy && pip install -r requirements.txt`
+6. (container) `cd /home/catkin_ws && catkin_init_workspace`
+7. (container) `catkin build elevation_mapping_cupy && catkin build convex_plane_decomposition_ros && source ./devel/setup.bash`
+8. (container) `roslaunch elevation_mapping_cupy elevation_mapping_cupy.launch`
+
 # Elevation Mapping cupy
 
 ## Overview
