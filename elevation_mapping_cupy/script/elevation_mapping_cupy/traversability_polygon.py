@@ -4,7 +4,9 @@
 #
 import numpy as np
 import cupy as cp
-from shapely.geometry import Polygon, MultiPoint
+import shapely
+# Issue: https://github.com/leggedrobotics/elevation_mapping_cupy/issues/41
+# from shapely.geometry import Polygon, MultiPoint
 
 
 def get_masked_traversability(map_array, mask):

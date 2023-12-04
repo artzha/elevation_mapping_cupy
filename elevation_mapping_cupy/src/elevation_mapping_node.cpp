@@ -15,6 +15,7 @@ int main(int argc, char** argv) {
   ros::init(argc, argv, "elevation_mapping");
   ros::NodeHandle nh("~");
 
+  ROS_INFO("[ElevationMappingCupy] start initialization");
   py::scoped_interpreter guard{};  // start the interpreter and keep it alive
   elevation_mapping_cupy::ElevationMappingNode mapNode(nh);
   py::gil_scoped_release release;

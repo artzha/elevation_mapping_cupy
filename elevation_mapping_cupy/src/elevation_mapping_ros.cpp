@@ -30,14 +30,16 @@ ElevationMappingNode::ElevationMappingNode(ros::NodeHandle& nh)
       enablePointCloudPublishing_(false),
       isGridmapUpdated_(false) {
   nh_ = nh;
+  ROS_INFO("[ElevationMapping NodeTopicRead] start map");
   map_.initialize(nh_);
+
   std::string pose_topic, map_frame;
   XmlRpc::XmlRpcValue publishers;
   std::vector<std::string> pointcloud_topics;
   std::vector<std::string> map_topics;
   double recordableFps, updateVarianceFps, timeInterval, updatePoseFps, updateGridMapFps, publishStatisticsFps;
   bool enablePointCloudPublishing(false);
-
+  
   nh.param<std::vector<std::string>>("pointcloud_topics", pointcloud_topics, {"points"});
   nh.getParam("publishers", publishers);
   nh.param<std::vector<std::string>>("initialize_frame_id", initialize_frame_id_, {"base"});
@@ -60,7 +62,7 @@ ElevationMappingNode::ElevationMappingNode(ros::NodeHandle& nh)
   nh.param<bool>("enable_normal_arrow_publishing", enableNormalArrowPublishing_, false);
   nh.param<bool>("enable_drift_corrected_TF_publishing", enableDriftCorrectedTFPublishing_, false);
   nh.param<bool>("use_initializer_at_start", useInitializerAtStart_, false);
-
+  ROS_INFO("[ElevationMapping NodeTopicRead] end initialization");
   enablePointCloudPublishing_ = enablePointCloudPublishing;
 
   for (const auto& pointcloud_topic : pointcloud_topics) {
